@@ -37,6 +37,7 @@ for i in $(echo $MY_REPO_DEPLOY_KEY | tr ";" "\n")
 do
   echo $i >> my-repo-deploy-key
 done
+cat my-repo-deploy-key
 chmod 600 my-repo-deploy-key
 ssh-agent bash -c "ssh-add my-repo-deploy-key; git clone $GIT_REPO my-repo"
 cd my-repo
