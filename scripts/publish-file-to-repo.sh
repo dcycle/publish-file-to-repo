@@ -48,6 +48,6 @@ mkdir -p $MY_REPO_LOCATION
 cp $FILE_LOCATION $MY_REPO_LOCATION
 git add $MY_REPO_LOCATION
 git commit -am "I am a robot adding a file to a repo."
-ssh-agent bash -c "ssh-add my-repo-deploy-key; git push origin master"
+ssh-agent bash -c "ssh-add ../my-repo-deploy-key; git push origin master"
 cd ../..
 rm -rf unversioned
