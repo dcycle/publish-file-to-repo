@@ -24,7 +24,21 @@ if [ -z "$MY_REPO_LOCATION" ]; then
   exit 1;
 fi
 
-echo "Git repo: $GIT_REPO"
-echo "File location: $FILE_LOCATION"
-echo "My repo deploy key: $MY_REPO_DEPLOY_KEY"
-echo "My repo location: $MY_REPO_LOCATION"
+# At this point we will have
+# $GIT_REPO: git@github.com:something/something.git
+# $FILE_LOCATION: /var/jenkins_home/workspace/google-sheets-to-csv-public/indicateurs.csv
+# $MY_REPO_DEPLOY_KEY: /path/to/super/private/deploy-key
+# $MY_REPO_LOCATION: ./indicateurs
+
+rm -rf unversioned
+mkdir unversioned
+cd unversioned
+ssh-agent bash -c "ssh-add $MY_REPO_DEPLOY_KEY; git clone $GIT_REPO my-repo"
+cd my-repo
+mkdir -p $MY_REPO_LOCATION
+cp $FILE_LOCATION $MY_REPO_LOCATION
+git add $MY_REPO_LOCATION
+git commit -am "I am a robot adding a file to a repo."
+git push origin master
+cd ../..
+rm -rf unversioned
