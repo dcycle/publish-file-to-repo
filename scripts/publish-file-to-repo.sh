@@ -33,10 +33,12 @@ fi
 rm -rf unversioned
 mkdir unversioned
 cd unversioned
+echo "-----BEGIN OPENSSH PRIVATE KEY-----" > my-repo-deploy-key
 for i in $(echo $MY_REPO_DEPLOY_KEY | tr ";" "\n")
 do
   echo $i >> my-repo-deploy-key
 done
+echo "-----END OPENSSH PRIVATE KEY-----" >> my-repo-deploy-key
 cat my-repo-deploy-key
 chmod 600 my-repo-deploy-key
 ssh-agent bash -c "ssh-add my-repo-deploy-key; git clone $GIT_REPO my-repo"
