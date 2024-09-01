@@ -41,6 +41,7 @@ done
 echo "-----END OPENSSH PRIVATE KEY-----" >> my-repo-deploy-key
 cat my-repo-deploy-key
 chmod 600 my-repo-deploy-key
+echo "Attempting to clone $GIT_REPO"
 ssh-agent bash -c "ssh-add my-repo-deploy-key; git clone $GIT_REPO my-repo"
 cd my-repo
 mkdir -p $MY_REPO_LOCATION
