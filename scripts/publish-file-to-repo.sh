@@ -27,15 +27,17 @@ fi
 # At this point we will have
 # $GIT_REPO: git@github.com:something/something.git
 # $FILE_LOCATION: /var/jenkins_home/workspace/google-sheets-to-csv-public/indicateurs.csv
-# $MY_REPO_DEPLOY_KEY: contents of a deploy private key
+# $MY_REPO_DEPLOY_KEY: contents of a deploy private key, with newlines replaced with ;
 # $MY_REPO_LOCATION: ./indicateurs
 
 rm -rf unversioned
 mkdir unversioned
 cd unversioned
-echo "$MY_REPO_DEPLOY_KEY" > my-repo-deploy-key
+\$ for i in $(echo $MY_REPO_DEPLOY_KEY | tr ";" "\n")
+do
+  echo $i >> my-repo-deploy-key
+done
 chmod 600 my-repo-deploy-key
-cat my-repo-deploy-key
 ssh-agent bash -c "ssh-add my-repo-deploy-key; git clone $GIT_REPO my-repo"
 cd my-repo
 mkdir -p $MY_REPO_LOCATION
