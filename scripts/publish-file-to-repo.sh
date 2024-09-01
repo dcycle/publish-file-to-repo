@@ -35,6 +35,7 @@ mkdir unversioned
 cd unversioned
 echo "$MY_REPO_DEPLOY_KEY" > my-repo-deploy-key
 chmod 600 my-repo-deploy-key
+cat my-repo-deploy-key
 ssh-agent bash -c "ssh-add my-repo-deploy-key; git clone $GIT_REPO my-repo"
 cd my-repo
 mkdir -p $MY_REPO_LOCATION
