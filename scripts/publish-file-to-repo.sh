@@ -33,7 +33,7 @@ fi
 rm -rf unversioned
 mkdir unversioned
 cd unversioned
-\$ for i in $(echo $MY_REPO_DEPLOY_KEY | tr ";" "\n")
+for i in $(echo $MY_REPO_DEPLOY_KEY | tr ";" "\n")
 do
   echo $i >> my-repo-deploy-key
 done
