@@ -27,7 +27,7 @@ fi
 # At this point we will have
 # $GIT_REPO: git@github.com:something/something.git
 # $FILE_LOCATION: /var/jenkins_home/workspace/google-sheets-to-csv-public/indicateurs.csv
-# $MY_REPO_DEPLOY_KEY: /path/to/super/private/deploy-key
+# $MY_REPO_DEPLOY_KEY: contents of a deploy private key
 # $MY_REPO_LOCATION: ./indicateurs
 
 rm -rf unversioned
